@@ -1,0 +1,33 @@
+from selenium.webdriver.common.by import By
+
+
+class AdminPage:
+
+    INPUT_USER_NAME = (By.CSS_SELECTOR, 'input[id="username"]')
+    INPUT_PASSWORD = (By.CSS_SELECTOR, 'input[id="password"]')
+    BUTTON_LOGIN = (By.CSS_SELECTOR, 'button[type="submit"]')
+    INPUT_NUMBER_OF_ROOM = (By.CSS_SELECTOR, 'input[id="roomName"]')
+    TYPE_OF_ROOM = (By.CSS_SELECTOR, 'select[id="type"]')
+    TYPE_OF_ROOM_SINGLE = (By.CSS_SELECTOR, 'option[value="Single"]')
+    TYPE_OF_ROOM_TWIN = (By.CSS_SELECTOR, 'option[value="Twin"]')
+    TYPE_OF_ROOM_DOUBLE = (By.CSS_SELECTOR, 'option[value="Double"]')
+    TYPE_OF_ROOM_FAMILY = (By.CSS_SELECTOR, 'option[value="Family"]')
+    TYPE_OF_ROOM_SUITE = (By.CSS_SELECTOR, 'option[value="Suite"]')
+    SELECT_ACCESSIBLE = (By.CSS_SELECTOR, 'select[id="accessible"]')
+    SELECT_ACCESSIBLE_TRUE = (By.CSS_SELECTOR, 'option[value="true"]')
+    SELECT_ACCESSIBLE_FALSE = (By.CSS_SELECTOR, 'option[value="false"]')
+    INPUT_PRICE = (By.CSS_SELECTOR, 'input[id="roomPrice"]')
+    WIFI_CHECKBOX_TEXT = (By.CSS_SELECTOR, 'label[for="wifiCheckbox"]')
+    WIFI_CHECKBOX = (By.CSS_SELECTOR, 'input[id="wifiCheckbox"]')
+    REFRESHMENTS_CHECKBOX_TEXT = (By.CSS_SELECTOR, 'label[for="refreshCheckbox"]')
+    REFRESHMENTS_CHECKBOX = (By.CSS_SELECTOR, 'input[id="refreshCheckbox"]')
+    TV_CHECKBOX_TEXT = (By.CSS_SELECTOR, 'label[for="tvCheckbox"]')
+    TV_CHECKBOX = (By.CSS_SELECTOR, 'input[id="tvCheckbox"]')
+    SAFE_CHECKBOX_TEXT = (By.CSS_SELECTOR, 'label[for="safeCheckbox"]')
+    SAFE_CHECKBOX = (By.CSS_SELECTOR, 'input[id="safeCheckbox"]')
+    RADIO_CHECKBOX_TEXT = (By.CSS_SELECTOR, 'label[for="radioCheckbox"]')
+    RADIO_CHECKBOX = (By.CSS_SELECTOR, 'input[id="radioCheckbox"]')
+    VIEWS_CHECKBOX_TEXT = (By.CSS_SELECTOR, 'label[for="viewsCheckbox"]')
+    VIEWS_CHECKBOX = (By.CSS_SELECTOR, 'input[id="viewsCheckbox"]')
+    #DELETE_ROOM = (By.CSS_SELECTOR, 'span[id="3"]')
+    CREATE_ROOM = (By.CSS_SELECTOR, 'button[id="createRoom"]')
