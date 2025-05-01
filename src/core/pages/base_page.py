@@ -3,7 +3,9 @@ from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
 
 class BasePage:
-
+    """
+    The class contains methods for searching items on the site
+    """
     def __init__(self, driver, url):
         self.driver = driver
         self.url = url
@@ -29,3 +31,7 @@ class BasePage:
 
     def go_to_element(self, element):
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
+
+    def go_up(self, locator, timeout=2):
+        self.driver.execute_script("window.scrollTo(0, 0);")
+        return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))

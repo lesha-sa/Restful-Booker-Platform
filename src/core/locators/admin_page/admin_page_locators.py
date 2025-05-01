@@ -1,10 +1,12 @@
 from selenium.webdriver.common.by import By
 
 
-class AdminPage:
-
-    INPUT_USER_NAME = (By.CSS_SELECTOR, 'input[id="username"]')
-    INPUT_PASSWORD = (By.CSS_SELECTOR, 'input[id="password"]')
+class AdminPageLocators:
+    """
+    Class contains the locators for the elements on the Admin Page
+    """
+    INPUT_LOGIN_USER_NAME = (By.CSS_SELECTOR, 'input[id="username"]')
+    INPUT_LOGIN_PASSWORD = (By.CSS_SELECTOR, 'input[id="password"]')
     BUTTON_LOGIN = (By.CSS_SELECTOR, 'button[type="submit"]')
     INPUT_NUMBER_OF_ROOM = (By.CSS_SELECTOR, 'input[id="roomName"]')
     TYPE_OF_ROOM = (By.CSS_SELECTOR, 'select[id="type"]')
