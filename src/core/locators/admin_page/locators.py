@@ -5,12 +5,12 @@ class AdminPageLocators:
     """
     Class contains the locators for the elements on the Admin Page
     """
-    #loging
+    # loging
     INPUT_LOGIN_USER_NAME = (By.CSS_SELECTOR, 'input[id="username"]')
     INPUT_LOGIN_PASSWORD = (By.CSS_SELECTOR, 'input[id="password"]')
     BUTTON_LOGIN = (By.CSS_SELECTOR, 'button[type="submit"]')
 
-    #create room
+    # create room
     INPUT_NUMBER_OF_ROOM = (By.CSS_SELECTOR, 'input[id="roomName"]')
     TYPE_OF_ROOM = (By.CSS_SELECTOR, 'select[id="type"]')
     TYPE_OF_ROOM_SINGLE = (By.CSS_SELECTOR, 'option[value="Single"]')
@@ -34,5 +34,5 @@ class AdminPageLocators:
     RADIO_CHECKBOX = (By.CSS_SELECTOR, 'input[id="radioCheckbox"]')
     VIEWS_CHECKBOX_TEXT = (By.CSS_SELECTOR, 'label[for="viewsCheckbox"]')
     VIEWS_CHECKBOX = (By.CSS_SELECTOR, 'input[id="viewsCheckbox"]')
-    #DELETE_ROOM = (By.CSS_SELECTOR, 'span[id="3"]')
+    # DELETE_ROOM = (By.CSS_SELECTOR, 'span[id="3"]')
     CREATE_ROOM = (By.CSS_SELECTOR, 'button[id="createRoom"]')
