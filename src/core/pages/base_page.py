@@ -6,7 +6,7 @@ class BasePage:
     """
     The class contains methods for searching items on the site
     """
-    def __init__(self, driver, url):
+    def __init__(self, driver, url = None):
         self.driver = driver
         self.url = url
 
