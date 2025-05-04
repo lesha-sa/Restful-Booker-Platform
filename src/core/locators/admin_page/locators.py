@@ -5,9 +5,12 @@ class AdminPageLocators:
     """
     Class contains the locators for the elements on the Admin Page
     """
+    #loging
     INPUT_LOGIN_USER_NAME = (By.CSS_SELECTOR, 'input[id="username"]')
     INPUT_LOGIN_PASSWORD = (By.CSS_SELECTOR, 'input[id="password"]')
     BUTTON_LOGIN = (By.CSS_SELECTOR, 'button[type="submit"]')
+
+    #create room
     INPUT_NUMBER_OF_ROOM = (By.CSS_SELECTOR, 'input[id="roomName"]')
     TYPE_OF_ROOM = (By.CSS_SELECTOR, 'select[id="type"]')
     TYPE_OF_ROOM_SINGLE = (By.CSS_SELECTOR, 'option[value="Single"]')

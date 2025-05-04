@@ -1,4 +1,4 @@
-from src.core.pages.admin_page.admin_page_create_room import AdminPageCreateRoom
+from src.core.pages.admin_page.create_room import AdminPageCreateRoom
 
 
 class TestAdminPageCreateRoom:
