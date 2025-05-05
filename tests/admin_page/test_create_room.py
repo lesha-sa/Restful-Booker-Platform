@@ -8,3 +8,5 @@ class TestAdminPageCreateRoom:
         loging.admin_page_loging()
         create_room = AdminPageCreateRoom(driver)
         create_room.admin_page_create_room()
+        number_of_room= create_room.admin_page_create_room()
+        print(f'New room number = {number_of_room}')
