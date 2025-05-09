@@ -36,3 +36,4 @@ class AdminPageLocators:
     VIEWS_CHECKBOX = (By.CSS_SELECTOR, 'input[id="viewsCheckbox"]')
     # DELETE_ROOM = (By.CSS_SELECTOR, 'span[id="3"]')
     CREATE_ROOM = (By.CSS_SELECTOR, 'button[id="createRoom"]')
+    CHECK_CREATE_ROOM_BY_NUMBER = (By.XPATH, "//p[text()='{number}']")

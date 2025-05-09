@@ -16,23 +16,25 @@ class AdminPageLogging(BasePage):
     locators = AdminPageLocators
 
     def admin_page_loging(self):
+        """admin panel login"""
         # enter_login_name(user_name_field, 'admin')
         # enter_login_password()
-        self.input_login()
-        self.input_password()
-        self.click_button_login()
+        try:
+            logger.debug("Beginning of authorization")
+            self.input_login()
+            self.input_password()
+            self.click_button_login()
+            logger.success("Successful authorization")
+        except Exception as e:
+            logger.error(f"Authorization error: {str(e)}")
+            raise
 
     def input_login(self):
         self.element_is_visible(self.locators.INPUT_LOGIN_USER_NAME).send_keys('admin')
-        logger.debug('input login')
-        #time.sleep(1)
 
     def input_password(self):
         self.element_is_visible(self.locators.INPUT_LOGIN_PASSWORD).send_keys('password')
-        logger.debug('input password')
-        #time.sleep(1)
 
     def click_button_login(self):
         self.element_is_visible(self.locators.BUTTON_LOGIN).click()
-        logger.debug('click button login')
         time.sleep(1)
