@@ -3,10 +3,32 @@
 
 
 ## Table of contents
-1. [Test framework configuration and setup](#test-framework-configuration-and-setup)
-2. [Preparation before running tests](#preparation-before-running-tests)
+1. [Preparation before running tests](#preparation-before-running-tests)
+2. [Test framework configuration and setup](#test-framework-configuration-and-setup)
 3. [Tests](#tests)
 
+
+## Preparation before running tests
+Create virtual environment.
+To create a virtual environment, execute the following commands in the command line:
+```bash
+pip install virtualenv
+```
+
+Creates a `venv` folder with the environment
+```bash
+python -m venv venv
+```
+To activate the virtual environment:
+
+```bash
+venv\Scripts\activate
+```
+
+All used packages are stored in requirements.txt
+```bash
+pip install -r requirements.txt
+```
 
 ### Test framework configuration and setup
 
@@ -58,21 +80,5 @@ related info: http://faker.rtfd.org/
 pip install Faker
 ```
 
-## Preparation before running tests
-Create virtual environment.
-To create a virtual environment, execute the following commands in the command line:
-```bash
-pip install virtualenv
-```
-To activate the virtual environment:
-
-```bash
-venv\Scripts\activate
-```
-
-All used packages are stored in requirements.txt
-```bash
-pip install -r requirements.txt
-```
 
 ## Tests In progress
