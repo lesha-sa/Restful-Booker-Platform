@@ -1,0 +1,9 @@
+/.pytest_cache/
+/venv/
+/.idea/
+/.git/
+.idea/
+*.iml
+*.ipr
+*.iws
+*.log
