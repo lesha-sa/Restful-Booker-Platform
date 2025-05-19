@@ -17,7 +17,7 @@ pip install virtualenv
 
 Creates a `venv` folder with the environment
 ```bash
-python -m venv venv
+py -3.11 -m venv venv
 ```
 To activate the virtual environment:
 
