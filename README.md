@@ -1,84 +1,103 @@
-## Test automation framework for testing UI web site - https://automationintesting.online/
+# Test Automation Framework for UI Web Testing  
+https://automationintesting.online/
 
+---
 
+## Table of Contents
+1. [Preparation before Running Tests](#preparation-before-running-tests)  
+2. [Test Framework Configuration and Setup](#test-framework-configuration-and-setup)  
+3. [Running Tests Locally](#running-tests-locally)  
+4. [Running Tests with Docker Compose](#running-tests-with-docker-compose)  
+5. [CI/CD Integration with GitHub Actions](#cicd-integration-with-github-actions)  
+6. [Additional Notes](#additional-notes)  
 
-## Table of contents
-1. [Preparation before running tests](#preparation-before-running-tests)
-2. [Test framework configuration and setup](#test-framework-configuration-and-setup)
-3. [Tests](#tests)
+---
 
+## Preparation before Running Tests
 
-## Preparation before running tests
-Create virtual environment.
-To create a virtual environment, execute the following commands in the command line:
+Create a Python virtual environment locally:
+
 ```bash
 pip install virtualenv
-```
-
-Creates a `venv` folder with the environment
-```bash
 py -3.11 -m venv venv
-```
-To activate the virtual environment:
-
-```bash
 venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-All used packages are stored in requirements.txt
+## Test Framework Configuration and Setup
+We use pip-tools to manage dependencies and generate requirements.txt.
+
+Main Python packages used
+* pytest — test runner
+
+* selenium — for UI web testing
+
+* webdriver-manager — auto-manages browser drivers
+
+* loguru — for logging
+
+* requests — HTTP requests
+
+* Faker — test data generation
+
+Install all dependencies using:
 ```bash
 pip install -r requirements.txt
 ```
 
-### Test framework configuration and setup
-
-In this project used 'pip-tools'. All used Python packages for the current project are generates in requirements.txt
-Below is the list of main packages with references
-
-### **For test itself**
-### pytest
-
-related info: https://docs.pytest.org/en/latest/
+## Running Tests Locally
+Run tests via pytest command:
 ```bash
-    pip install pytest
-```    
-## **For ui/web testing**
-
-### selenium
-
-related info: https://selenium-python.readthedocs.io/
-```bash
-    pip install selenium
-```
-### webdriver-manager
-
-related info:https://github.com/bonigarcia/webdrivermanager
-```bash
-    pip install webdriver-manager
+pytest tests/
 ```
 
-## **Logging**
+## Running Tests with Docker Compose
+Overview
+Tests run inside a Docker container, which waits for a Selenium standalone Chrome container to be ready before starting.
 
-### loguru
+Files involved
+* Dockerfile — builds Python test environment, installs dependencies, copies project, sets wait script as entrypoint.
 
-pypi.org docs: https://pypi.org/project/loguru/
-related info: https://loguru.readthedocs.io/
+* docker-compose.yml — defines two services:
+
+  * selenium: Selenium standalone Chrome server on port 4444
+
+   * tests: test runner container built from Dockerfile, depends on selenium, mounts project and logs directories, runs wait script and tests.
+
+* wait-for-selenium.sh — bash script that waits until Selenium server is available on selenium:4444.
+
+How to run
+1. Ensure Docker and Docker Compose are installed and running.
+2. From project root, run:
 ```bash
-pip install loguru
+docker-compose up --build --abort-on-container-exit
 ```
-## **REQUESTS**
-pypi.org docs: https://pypi.org/project/requests/
-```bash
-pip install requests
-```
-## **Data generators**
+3. The tests container waits for Selenium to be ready and then runs the tests automatically.
+4. Logs will be saved in the logs/ directory on the host machine.
 
-### Faker
+## CI/CD Integration with GitHub Actions
+This project uses GitHub Actions for continuous integration.
 
-related info: http://faker.rtfd.org/
-```bash
-pip install Faker
-```
+Workflow summary:
+* Runs on pushes or pull requests to branch features/A.
 
+* Checks out the repository.
 
-## Tests In progress
+* Builds and runs Docker Compose to start Selenium and run tests.
+
+* Uploads logs as artifacts for review.
+
+* Outputs success or failure message to console.
+
+## Additional Notes
+* Environment variables for test container are set in docker-compose.yml:
+
+   * SELENIUM_URL=http://selenium:4444/wd/hub — Selenium server URL inside Docker network.
+  
+   * LOG_PATH=/app/logs — directory for storing logs.
+  
+* wait-for-selenium.sh ensures tests don’t start before Selenium server is ready.
+
+* Logs are mounted as a volume to ./logs on host, so you can access test logs outside the container.
+
+* Keep your local repository updated with remote branches (git pull) to avoid conflicts.
