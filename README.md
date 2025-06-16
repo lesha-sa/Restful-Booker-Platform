@@ -101,3 +101,4 @@ Workflow summary:
 * Logs are mounted as a volume to ./logs on host, so you can access test logs outside the container.
 
 * Keep your local repository updated with remote branches (git pull) to avoid conflicts.
+# Test CI/CD trigger
