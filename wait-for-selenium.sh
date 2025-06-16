@@ -1,5 +1,6 @@
 #!/bin/sh
 set -ex
+echo "Script started"
 # -e: Exit immediately if a command exits with a non-zero status
 # -x: Print each command before executing it
 

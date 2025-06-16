@@ -14,9 +14,20 @@ jobs:
       - name: 📥 Checkout repository
         uses: actions/checkout@v3
 
+      - name: 🐳 Build Docker containers
+        run: docker-compose build
+
+      - name: 🐳 Check files in container root
+        run: docker-compose run --rm tests ls -l /
+
+      - name: 🐳 Check wait-for-selenium.sh permissions
+        run: docker-compose run --rm tests ls -l /wait-for-selenium.sh
+
+      - name: 🐳 Show wait-for-selenium.sh contents
+        run: docker-compose run --rm tests cat /wait-for-selenium.sh
+
       - name: 🐳 Run tests with Docker Compose
-        run: |
-          docker-compose up --build --abort-on-container-exit
+        run: docker-compose up --build --abort-on-container-exit
 
       - name: 📤 Upload logs
         if: always()
