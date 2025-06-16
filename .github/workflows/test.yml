@@ -2,9 +2,9 @@ name: Restful Booker Platform tests
 
 on:
   push:
-    branches: [ features/A ]
+    branches: [ features/docker-ci ]
   pull_request:
-    branches: [ features/A ]
+    branches: [ features/docker-ci ]
 
 jobs:
   tests:
