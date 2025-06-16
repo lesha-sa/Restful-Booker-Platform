@@ -1,0 +1,34 @@
+name: Restful Booker Platform tests
+
+on:
+  push:
+    branches: [ features/A ]
+  pull_request:
+    branches: [ features/A ]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 🐳 Run tests with Docker Compose
+        run: |
+          docker-compose up --build --abort-on-container-exit
+
+      - name: 📤 Upload logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: logs
+          path: logs/  # Папка с логами на хосте
+
+      - name: ✅ Success message
+        if: success()
+        run: echo "✅ Tests passed!"
+
+      - name: ❌ Failure message
+        if: failure()
+        run: echo "❌ Tests failed!"
