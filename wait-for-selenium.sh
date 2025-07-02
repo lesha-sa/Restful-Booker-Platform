@@ -19,5 +19,5 @@ done
 
 echo "Selenium is up - starting tests..."
 
-exec pytest tests/web_tests/admin_page/test_create_room.py
+exec pytest tests
 # Replace the shell with the pytest process
