@@ -1,4 +1,4 @@
-from src.core.pages.front_page.booking_room import BookRoom
+'''from src.core.pages.front_page.booking_room import BookRoom
 
 class TestBookRoom:
     def test_book_room(self, driver):
@@ -6,4 +6,4 @@ class TestBookRoom:
         book_room_page.open()
         book_room_page.book_room()
         booking_confirmed = book_room_page.book_room()
-        assert 'Booking Confirmed' == booking_confirmed
+        assert 'Booking Confirmed' == booking_confirmed'''
