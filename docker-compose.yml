@@ -9,6 +9,17 @@ services:
       - "4444:4444"
     # Increase shared memory size to avoid Chrome crashes (esp. in headless mode)
     shm_size: "2g"
+  db:
+    image: postgres:15
+    container_name: db
+    environment:
+      POSTGRES_DB: hotel_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   tests:
     # Build Docker image from current directory (uses Dockerfile)
@@ -27,7 +38,8 @@ services:
     # Entry point — wait for Selenium, then run tests
     command: [ "/wait-for-selenium.sh" ]
 
-    environment:
-      - LOG_PATH=/app/logs
-      # URL to reach Selenium from within the Docker network
-      - SELENIUM_URL=http://selenium:4444/wd/hub
+    env_file:
+      - .env
+
+volumes:
+  postgres_data:
