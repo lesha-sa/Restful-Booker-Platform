@@ -7,9 +7,9 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
+from db.connector import get_db_connection
 
 load_dotenv()
-
 
 def is_resolvable(host: str) -> bool:
     try:
@@ -33,3 +33,10 @@ def driver():
 
     yield driver
     driver.quit()
+
+
+@pytest.fixture(scope='function')
+def db_connection():
+    conn = get_db_connection()
+    yield conn
+    conn.close()
