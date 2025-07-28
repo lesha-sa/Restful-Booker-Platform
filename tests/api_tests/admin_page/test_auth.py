@@ -1,4 +1,4 @@
-from tests.helpers.api.get_auth_token import get_token
+from api.get_auth_token import get_token
 
 
 def test_auth():
