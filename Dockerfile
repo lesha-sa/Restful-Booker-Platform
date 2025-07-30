@@ -3,7 +3,6 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /python-app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
 # Install netcat (nc) to check Selenium availability
 RUN apt-get update && apt-get install -y netcat-openbsd && rm -rf /var/lib/apt/lists/*
 COPY wait-for-selenium.sh /wait-for-selenium.sh
