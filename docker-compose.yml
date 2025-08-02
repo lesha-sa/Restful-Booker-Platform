@@ -20,9 +20,9 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./db:/docker-entrypoint-initdb.d/
+      - ./src/db:/docker-entrypoint-initdb.d/
 
-  tests:
+  docker_tests:
     # Build Docker image from current directory (uses Dockerfile)
     build: .
     # Name of the container that runs tests
