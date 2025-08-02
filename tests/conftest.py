@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
-from db.connector import get_db_connection
+from src.db.connector import get_db_connection
 
 load_dotenv()
 

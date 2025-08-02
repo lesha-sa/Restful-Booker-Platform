@@ -1,4 +1,4 @@
-from api.get_auth_token import get_token
+from src.api.get_auth_token import get_token
 
 
 def test_auth():
