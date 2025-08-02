@@ -22,7 +22,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./src/db:/docker-entrypoint-initdb.d/
 
-  docker_tests:
+  tests:
     # Build Docker image from current directory (uses Dockerfile)
     build: .
     # Name of the container that runs tests
