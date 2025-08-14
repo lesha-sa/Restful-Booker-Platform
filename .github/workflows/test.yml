@@ -3,11 +3,11 @@ name: Restful Booker Platform tests
 on:
   push:
     branches:
-    - features/docker-ci
+    - refactor_test_data_db
     - features/A
   pull_request:
     branches:
-      - features/docker-ci
+      - refactor_test_data_db
       - features/A
 
 jobs:
