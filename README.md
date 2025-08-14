@@ -1,6 +1,6 @@
 # Test Automation Framework for UI Web Testing  
 https://automationintesting.online/
-тест
+
 ---
 
 ## Table of Contents
