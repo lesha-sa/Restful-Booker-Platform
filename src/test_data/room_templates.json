@@ -1,0 +1,26 @@
+[
+  {
+    "room_id": 1,
+    "room_number": "522",
+    "room_type": "Single",
+    "accessible": "false",
+    "price": 55.0,
+    "room_details": "WiFi, TV"
+  },
+  {
+    "room_id": 2,
+    "room_number": "302",
+    "room_type": "Double",
+    "accessible": "true",
+    "price": 80.0,
+    "room_details": "WiFi, TV, Safe"
+  },
+  {
+    "room_id": 3,
+    "room_number": "224",
+    "room_type": "Suite",
+    "accessible": "true",
+    "price": 150.0,
+    "room_details": "WiFi, TV, Views, Radio"
+  }
+]
