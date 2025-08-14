@@ -3,9 +3,12 @@ from typing import Optional
 
 @dataclass
 class RoomTemplate:
+    """
+    Data class for storing room template information.
+    """
     room_id: int
     room_number: str
     room_type: str
     accessible: bool
     price: float
-    additional_services: Optional[str]
+    room_details: Optional[str]
