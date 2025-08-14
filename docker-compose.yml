@@ -30,6 +30,8 @@ services:
     depends_on:
       # Ensure Selenium container starts before this one
       - selenium
+    environment:
+      - LOG_PATH=/app/logs
     volumes:
       # Mount current project folder into the container at /app
       - .:/app
