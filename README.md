@@ -19,8 +19,14 @@ Create a Python virtual environment locally:
 
 ```bash
 pip install virtualenv
+```
+```bash
 py -3.11 -m venv venv
+```
+```bash
 venv\Scripts\activate
+```
+```bash
 pip install -r requirements.txt
 ```
 
