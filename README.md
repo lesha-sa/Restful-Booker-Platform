@@ -46,9 +46,20 @@ pip install -r requirements.txt
 ```
 
 ## Running Tests Locally
-Run tests via pytest command:
+Run tests without allure reports :
 ```bash
 pytest tests/
+```
+
+Run tests from allure reports and clearing old reports
+Run tests without allure reports :
+```bash
+ .\run_tests_allure.ps1
+```
+
+To view Allure reports
+```bash
+allure serve ./allure-results
 ```
 
 ## Running Tests with Docker Compose
