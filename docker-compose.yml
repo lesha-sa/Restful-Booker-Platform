@@ -9,6 +9,7 @@ services:
       - "4444:4444"
     # Increase shared memory size to avoid Chrome crashes (esp. in headless mode)
     shm_size: "2g"
+
   db:
     image: postgres:15
     container_name: db
@@ -30,13 +31,16 @@ services:
     depends_on:
       # Ensure Selenium container starts before this one
       - selenium
+      - db
     environment:
       - LOG_PATH=/app/logs
+      - ALLURE_RESULTS=/app/allure-results
     volumes:
       # Mount current project folder into the container at /app
       - .:/app
       - ./logs:/app/logs
-    # Set working directory inside the container
+      - ./allure-results:/app/allure-results
+     # Set working directory inside the container
     working_dir: /app
     # Entry point — wait for Selenium, then run tests
     command: [ "/wait-for-selenium.sh" ]
@@ -46,3 +50,4 @@ services:
 
 volumes:
   postgres_data:
+  allure-results:
