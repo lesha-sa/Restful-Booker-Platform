@@ -7,3 +7,7 @@
 *.ipr
 *.iws
 *.log
+Allure reports
+allure-report/
+allure-results/
+build/allure-results/
