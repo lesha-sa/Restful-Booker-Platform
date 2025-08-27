@@ -33,12 +33,19 @@ jobs:
       - name: 🐳 Run tests with Docker Compose
         run: docker compose up --build --abort-on-container-exit
 
+      - name: 📤 Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results/
+
       - name: 📤 Upload logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: logs
-          path: logs/  # Папка с логами на хосте
+          path: logs/
 
       - name: ✅ Success message
         if: success()
