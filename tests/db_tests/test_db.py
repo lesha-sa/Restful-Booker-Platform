@@ -1,4 +1,5 @@
 import pytest
+import allure
 from config.logger.config_logger import get_logger
 from src.repository.room_template_repository import get_all_room_templates
 from src.db.connector import get_db_connection
@@ -19,25 +20,29 @@ def is_db_available():
 
 
 @pytest.mark.skipif(not is_db_available(), reason="Database unavailable")
+@allure.feature("Room templates")
+@allure.story("Check room template data")
 def test_all_data():
     """
     Checking of room template data
     The test is performed only if the database is available
     """
-    data = get_all_room_templates()
+    with allure.step("Get all room templates"):
+        data = get_all_room_templates()
 
-    # Checking that the data exists
-    assert len(data) > 0, "The list of room templates is empty"
-    logger.info(f"Room templates found: {len(data)}")
+    with allure.step("Verify that data exists"):
+        assert len(data) > 0, "The list of room templates is empty"
+        logger.info(f"Room templates found: {len(data)}")
+        allure.attach(str([t.room_number for t in data]), name="Room templates", attachment_type=allure.attachment_type.TEXT)
 
-    # Take the first element
-    first = data[0]
-    assert first.price is not None, "The price for the first template is not specified"
-    assert hasattr(first, "room_number"), "The first template does not have a room number"
-    logger.info(f"First template: {first.room_number}, цена: {first.price}")
+    with allure.step("Check first template"):
+        first = data[0]
+        assert first.price is not None, "The price for the first template is not specified"
+        assert hasattr(first, "room_number"), "The first template does not have a room number"
+        logger.info(f"First template: {first.room_number}, цена: {first.price}")
 
-    # If there is a second element, we check it.
     if len(data) > 1:
-        second = data[1]
-        assert second.price is not None, "The price for the second template is not specified"
-        logger.info(f"Second template: {second.room_number}, price: {second.price}")
+        with allure.step("Check second template"):
+            second = data[1]
+            assert second.price is not None, "The price for the second template is not specified"
+            logger.info(f"Second template: {second.room_number}, price: {second.price}")
