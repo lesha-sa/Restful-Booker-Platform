@@ -19,5 +19,7 @@ done
 
 echo "Selenium is up - starting tests..."
 
-exec pytest tests
-# Replace the shell with the pytest process
+# Clearing old Allure results
+rm -rf /app/allure-results/*
+
+exec pytest tests --alluredir=/app/allure-results
