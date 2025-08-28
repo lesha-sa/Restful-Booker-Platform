@@ -84,8 +84,12 @@ Files involved
 * wait-for-selenium.sh — bash script that waits until Selenium server is available on selenium:4444.
 
 How to run
-1. Ensure Docker and Docker Compose are installed and running.
-2. From project root, run:
+1. Prepare the environment (make wait-for-selenium.sh executable and convert it to Unix-format):
+```bash
+./before_launching_docker.sh
+```
+2. Ensure Docker and Docker Compose are installed and running.
+3. From project root, run:
 ```bash
 docker-compose up --build --abort-on-container-exit
 ```
