@@ -23,26 +23,21 @@ The script creates a virtual environment, puts all dependencies and runs the tes
 .\setup.ps1
 ```
 
-
-## Test Framework Configuration and Setup
-We use pip-tools to manage dependencies and generate requirements.txt.
-
-
 ## Running Tests Locally
-Run tests without allure reports:
+1. Run tests without allure reports:
 ```bash
 pytest tests/
 ```
-
-Running tests with Allure report generation and deleting old reports:
+2. Running tests with Allure report generation and deleting old reports:
 ```bash
  .\run_tests_allure.ps1
 ```
-
-To view Allure reports
+3. To view Allure reports
 ```bash
 allure serve ./allure-results
 ```
+4. All test logs are saved in the ./logs folder.
+To view it, just open the required file in any text editor.
 
 ## Running Tests with Docker Compose
 Overview
@@ -65,10 +60,24 @@ How to run
 ./before_launching_docker.sh
 ```
 2. Ensure Docker and Docker Compose are installed and running.
-3. From project root, run:
+3. Building Docker images. Reassembles all images anew, 
+ignoring the cache, so that tests run with the actual changes.
 ```bash
-docker-compose up --build --abort-on-container-exit
+docker compose build --no-cache
 ```
+4. Running tests and automatically terminating containers.
+Containers will automatically stop after the tests are completed.
+All logs and test results are saved to the specified volumes (./logs, ./allure-results).
+```bash
+docker compose up --abort-on-container-exit
+```
+5. After running tests, Allure results are saved in ./allure-results.
+To open the report locally:
+```bash
+allure serve ./allure-results
+```
+6. Test logs from the container are saved in the ./logs folder on the local machine.
+You can open them there just as you would when running locally.
 
 ## CI/CD Integration with GitHub Actions
 This project uses GitHub Actions for continuous integration.
