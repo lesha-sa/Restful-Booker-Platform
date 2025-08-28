@@ -15,50 +15,26 @@ https://automationintesting.online/
 
 ## Preparation before Running Tests
 
-Create a Python virtual environment locally:
+Install Python 3.11 (if not): https://www.python.org/downloads/release/python-3119/
 
+Run the preparation script.
+The script creates a virtual environment, puts all dependencies and runs the tests.
 ```bash
-pip install virtualenv
+.\setup.ps1
 ```
-```bash
-py -3.11 -m venv venv
-```
-```bash
-venv\Scripts\activate
-```
-```bash
-pip install -r requirements.txt
-```
+
 
 ## Test Framework Configuration and Setup
 We use pip-tools to manage dependencies and generate requirements.txt.
 
-Main Python packages used
-* pytest — test runner
-
-* selenium — for UI web testing
-
-* webdriver-manager — auto-manages browser drivers
-
-* loguru — for logging
-
-* requests — HTTP requests
-
-* Faker — test data generation
-
-Install all dependencies using:
-```bash
-pip install -r requirements.txt
-```
 
 ## Running Tests Locally
-Run tests without allure reports :
+Run tests without allure reports:
 ```bash
 pytest tests/
 ```
 
-Run tests from allure reports and clearing old reports
-Run tests without allure reports :
+Running tests with Allure report generation and deleting old reports:
 ```bash
  .\run_tests_allure.ps1
 ```
@@ -93,8 +69,6 @@ How to run
 ```bash
 docker-compose up --build --abort-on-container-exit
 ```
-3. The tests container waits for Selenium to be ready and then runs the tests automatically.
-4. Logs will be saved in the logs/ directory on the host machine.
 
 ## CI/CD Integration with GitHub Actions
 This project uses GitHub Actions for continuous integration.
