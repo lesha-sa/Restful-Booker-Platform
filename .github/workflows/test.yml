@@ -31,7 +31,7 @@ jobs:
         run: docker compose run --rm tests cat /app/scripts/wait-for-selenium.sh
 
       - name: 🐳 Run tests with Docker Compose
-        run: docker-compose run --rm tests pytest --browser=chrome --alluredir=./allure-results/chrome
+        run: docker compose run --rm tests pytest --browser=chrome --alluredir=./allure-results/chrome
 
 
       - name: 📤 Upload Allure results (Chrome)
