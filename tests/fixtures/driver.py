@@ -1,44 +1,73 @@
 import os
 import pytest
+import allure
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from webdriver_manager.chrome import ChromeDriverManager
-from urllib.parse import urlparse
-
+from webdriver_manager.firefox import GeckoDriverManager
 from config.logger.config_logger import get_logger
-from src.db.connector import is_resolvable
+
 
 logger = get_logger()
 
 
 @pytest.fixture(scope='function')
-def driver():
+def driver(request):
     """
-        Returns a Selenium WebDriver instance.
-        If SELENIUM_URL is set and resolvable, uses Remote WebDriver.
-        Otherwise, starts a local Chrome browser.
-        The browser is automatically closed after the test.
+    Selenium WebDriver fixture for Docker + local:
+    - Browser selection via --browser (chrome/firefox)
+    - Remote WebDriver via SELENIUM_CHROME_URL / SELENIUM_FIREFOX_URL
+    - Allure parameter 'Browser'
+    - Maximized window for Chrome, large window for Firefox
     """
-    selenium_url = os.getenv('SELENIUM_URL')
-    options = Options()
-    options.add_argument("--start-maximized")
+    browser_name = request.config.getoption("--browser").lower()
 
-    # If SELENIUM_URL is set and its host is accessible over the network:
-    #   - urlparse(...).hostname extracts the host name from the URL (e.g., ‘selenium’)
-    #   - is_resolvable(host) checks that this host can be found on the network (DNS/resolution)
-    # That is, you can connect to remote Selenium.
-    if selenium_url and is_resolvable(urlparse(selenium_url).hostname):
-        logger.info(f"Starting Remote WebDriver at {selenium_url}")
-        driver_instance = webdriver.Remote(command_executor=selenium_url, options=options)
+    # Allure parameter
+    allure.dynamic.parameter("Browser", browser_name)
+
+    # --- Chrome options ---
+    chrome_options = ChromeOptions()
+    chrome_options.add_argument("--start-maximized")
+    chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
+    chrome_options.add_experimental_option(
+        "prefs", {"profile.default_content_setting_values.notifications": 2}
+    )
+
+    # --- Firefox options ---
+    firefox_options = FirefoxOptions()
+    firefox_options.add_argument("--width=1920")
+    firefox_options.add_argument("--height=1080")
+
+    # --- Docker Selenium URLs ---
+    selenium_chrome_url = os.getenv("SELENIUM_CHROME_URL")
+    selenium_firefox_url = os.getenv("SELENIUM_FIREFOX_URL")
+
+    # --- Remote WebDriver ---
+    if browser_name == "chrome" and selenium_chrome_url:
+        logger.info(f"Connecting to remote Chrome at {selenium_chrome_url}")
+        driver_instance = webdriver.Remote(command_executor=selenium_chrome_url, options=chrome_options)
+    elif browser_name == "firefox" and selenium_firefox_url:
+        logger.info(f"Connecting to remote Firefox at {selenium_firefox_url}")
+        driver_instance = webdriver.Remote(command_executor=selenium_firefox_url, options=firefox_options)
     else:
-        # Otherwise, launch the local Chrome browser.
-        logger.info("Starting local Chrome WebDriver")
-        driver_instance = webdriver.Chrome(
-            service=ChromeService(ChromeDriverManager().install()),
-            options=options
-        )
+        # --- Local fallback ---
+        logger.info(f"Starting local {browser_name} WebDriver")
+        if browser_name == "chrome":
+            driver_instance = webdriver.Chrome(
+                service=ChromeService(ChromeDriverManager().install()),
+                options=chrome_options
+            )
+        elif browser_name == "firefox":
+            driver_instance = webdriver.Firefox(
+                service=FirefoxService(GeckoDriverManager().install()),
+                options=firefox_options
+            )
+        else:
+            raise ValueError(f"Unsupported browser: {browser_name}")
 
     yield driver_instance
     driver_instance.quit()
-    logger.info("Browser closed")
+    logger.info(f"{browser_name.capitalize()} browser closed")
