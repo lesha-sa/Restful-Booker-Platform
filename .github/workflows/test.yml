@@ -25,10 +25,10 @@ jobs:
         run: docker compose run --rm tests ls -l /
 
       - name: 🐳 Check wait-for-selenium.sh permissions
-        run: docker compose run --rm tests ls -l /wait-for-selenium.sh
+        run: docker compose run --rm tests ls -l /app/scripts/wait-for-selenium.sh
 
       - name: 🐳 Show wait-for-selenium.sh contents
-        run: docker compose run --rm tests cat /wait-for-selenium.sh
+        run: docker compose run --rm tests cat /app/scripts/wait-for-selenium.sh
 
       - name: 🐳 Run tests with Docker Compose
         run: docker-compose run --rm tests pytest --browser=chrome --alluredir=./allure-results/chrome
