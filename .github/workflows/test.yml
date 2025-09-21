@@ -3,7 +3,7 @@ name: Restful Booker Platform tests
 on:
   push:
     branches:
-    - refactor_test_data_db
+    - features/add-firefox-support
     - features/A
   pull_request:
     branches:
@@ -31,14 +31,15 @@ jobs:
         run: docker compose run --rm tests cat /wait-for-selenium.sh
 
       - name: 🐳 Run tests with Docker Compose
-        run: docker compose up --build --abort-on-container-exit
+        run: docker-compose run --rm tests pytest --browser=chrome --alluredir=./allure-results/chrome
 
-      - name: 📤 Upload Allure results
+
+      - name: 📤 Upload Allure results (Chrome)
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: allure-results
-          path: allure-results/
+          name: allure-results-chrome
+          path: allure-results/chrome/
 
       - name: 📤 Upload logs
         if: always()
