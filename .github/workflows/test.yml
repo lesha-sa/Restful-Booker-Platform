@@ -3,11 +3,9 @@ name: Restful Booker Platform tests
 on:
   push:
     branches:
-    - features/add-firefox-support
     - features/A
   pull_request:
     branches:
-      - refactor_test_data_db
       - features/A
 
 jobs:
