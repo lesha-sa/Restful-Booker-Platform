@@ -1,5 +1,5 @@
 services:
-  selenium:
+  selenium-chrome:
     # Use official Selenium with Chrome
     image: selenium/standalone-chrome
     # Name of the Selenium container
@@ -9,6 +9,15 @@ services:
       - "4444:4444"
     # Increase shared memory size to avoid Chrome crashes (esp. in headless mode)
     shm_size: "2g"
+
+  selenium-firefox:
+      # Use official Selenium image with Firefox
+      image: selenium/standalone-firefox:latest
+      container_name: selenium-firefox
+      # Map internal port 4444 to host port 4445 to avoid conflicts with Chrome
+      ports:
+        - "4445:4444"
+      shm_size: "2g"
 
   db:
     image: postgres:15
@@ -20,7 +29,9 @@ services:
     ports:
       - "5432:5432"
     volumes:
+      # Persist database data outside the container
       - postgres_data:/var/lib/postgresql/data
+      # Initialize database with scripts from local folder
       - ./src/db:/docker-entrypoint-initdb.d/
 
   tests:
@@ -29,12 +40,20 @@ services:
     # Name of the container that runs tests
     container_name: tests
     depends_on:
-      # Ensure Selenium container starts before this one
-      - selenium
+      # Make sure that Selenium containers and the database are started before launching the tests
+      - selenium-chrome
+      - selenium-firefox
       - db
     environment:
-      - LOG_PATH=/app/logs
-      - ALLURE_RESULTS=/app/allure-results
+      # Path where test logs will be written inside the container
+      LOG_PATH: /app/logs
+      # Path where Allure test results will be saved
+      ALLURE_RESULTS: /app/allure-results
+      # URL for Chrome Remote WebDriver container
+      SELENIUM_CHROME_URL: http://selenium-chrome:4444/wd/hub
+      # URL for Firefox Remote WebDriver container
+      SELENIUM_FIREFOX_URL: http://selenium-firefox:4444/wd/hub
+
     volumes:
       # Mount current project folder into the container at /app
       - .:/app
@@ -43,11 +62,12 @@ services:
      # Set working directory inside the container
     working_dir: /app
     # Entry point — wait for Selenium, then run tests
-    command: [ "/wait-for-selenium.sh" ]
+    command: [ "/app/scripts/wait-for-selenium.sh" ]
 
     env_file:
       - .env
 
+#Declaring volumes for permanent data storage
 volumes:
   postgres_data:
   allure-results:
