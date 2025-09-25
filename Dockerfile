@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # After installation, clear the apt cache to reduce the image size
 RUN apt-get update && apt-get install -y netcat-openbsd && rm -rf /var/lib/apt/lists/*
 # Copy the scripts folder inside the container
-COPY ./scripts /app/scripts
+COPY . /app
 # Make the Selenium wait script executable
 RUN chmod +x /app/scripts/wait-for-selenium.sh
 # When the default container is started, this script will be executed,
