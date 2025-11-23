@@ -1,13 +1,29 @@
-/.pytest_cache/
+# Python caches
+__pycache__/
+*.pyc
+
+# Virtual environment
 /venv/
+
+# IDE
 /.idea/
-/.git/
-.idea/
 *.iml
 *.ipr
 *.iws
+
+# Git
+/.git/
+
+# Logs
 *.log
-Allure reports
+
+# Allure reports
 allure-report/
 allure-results/
 build/allure-results/
+
+# Pytest cache
+/.pytest_cache/
+
+# Environment files
+.env
