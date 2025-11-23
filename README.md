@@ -114,4 +114,3 @@ Workflow summary:
 2. wait-for-selenium.sh ensures tests don’t start before Selenium server is ready.
 3. Logs are mounted as a volume to ./logs on host, so you can access test logs outside the container.
 4. Keep your local repository updated with remote branches (git pull) to avoid conflicts.
-5. 
