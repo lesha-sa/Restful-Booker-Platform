@@ -15,12 +15,12 @@ https://automationintesting.online/
 
 ## Preparation before Running Tests
 
-Install Python 3.11 (if not): https://www.python.org/downloads/release/python-3119/
+Install Python 3.11 (if not): https://www.python.org/downloads/release/python-3118/
 
 Run the preparation script.
 The script creates a virtual environment, puts all dependencies and runs the tests.
 ```bash
-./setup.ps1
+./scripts/setup.ps1
 ```
 
 ## Running Tests Locally
