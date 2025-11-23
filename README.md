@@ -17,8 +17,13 @@ https://automationintesting.online/
 
 Install Python 3.11 (if not): https://www.python.org/downloads/release/python-3118/
 
-Run the preparation script.
-The script creates a virtual environment, puts all dependencies and runs the tests.
+Create a virtual environment
+```bash
+py -3.11 -m venv .venv
+```
+Set the Python interpreter in PyCharm Go to File → Settings → Project → Python Interpreter → Add → Existing environment Select .venv\Scripts\python.exe
+
+Run the setup script to install all required packages: The script puts all dependencies.
 ```bash
 ./scripts/setup.ps1
 ```
