@@ -11,7 +11,7 @@ https://automationintesting.online/
 5. [CI/CD Integration with GitHub Actions](#cicd-integration-with-github-actions)  
 6. [Additional Notes](#additional-notes)  
 
----
+----
 
 ## Preparation before Running Tests
 
